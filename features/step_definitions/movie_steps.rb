@@ -2,10 +2,9 @@
 
 Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
-    # each returned element will be a hash whose key is the table header.
-    # you should arrange to add that movie to the database here.
+    Movie.find_or_create_by_title_and_rating_and_release_date \
+    movie[:title], movie[:rating], movie[:release_date]
   end
-  assert false, "Unimplmemented"
 end
 
 # Make sure that one string (regexp) occurs before or after another one
