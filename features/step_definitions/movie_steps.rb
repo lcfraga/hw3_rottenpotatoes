@@ -9,9 +9,11 @@ end
 #   on the same page
 
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
-  #  ensure that that e1 occurs before e2.
-  #  page.content  is the entire content of the page as a string.
-  assert false, "Unimplmemented"
+  titles = page.all(:xpath, "//table[@id='movies']/tbody/tr/td[1]").collect do |element|
+    element.text
+  end
+
+  assert titles.index(e1) < titles.index(e2)
 end
 
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
